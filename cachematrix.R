@@ -1,21 +1,25 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The makeCacheMatrix function returns a list of two pairs of set/get functions
+## acting as a 'wrapper' of a matrix and its inverse.
+## The wrapper is created with the makeCacheMatrix creator function, with an uninitiated
+## (NULL) inverse.
+## 
+## The inverse matrix calculation is performed the first time it is requested through
+## the cacheSolve function and stored in the 'wrapper' for subsequent retrieval with the getInverse
+## function of the 'wrapper', as well as by subsequent calls of the cacheSolve function.
 
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-  # Varible that stores the inverse, if it has been calculated
+  # Varible that stores the inverse, if it has been calculated.
   inv <- NULL
   
-  # set method, that sets the matrix, and flags that no inverse has been calculated
-  # note that using the <<- operator the parent environment, of the makeCacheMatrix 
-  # function, is used
+  # set method, that sets the matrix, and sets its inverse to NULL, i.e. yet not calculated
   set <- function(y) {
     x <<- y
     inv <<- NULL
   }
   
-  # get method that returns the matrix, it finds x in the parent environment
+  # get method that returns the matrix
   get <- function() x
   
   # set method for the cached inverse
